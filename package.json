@@ -1,0 +1,15 @@
+{
+  "name": "tiw8-tp1-web-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://forge.univ-lyon1.fr/p2112390/tiw8-tp1-web-app.git",
+  "author": "mohammed bentiress",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "scripts": {
+    "start": "node server/index.js",
+    "test": "echo \"Error: pas de tests pour le moment\" && exit 1"
+  }
+}
