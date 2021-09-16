@@ -2,6 +2,7 @@ const { watch } = require("fs");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const ESLintPlugin = require('eslint-webpack-plugin');
 const path = require('path');
+const webpack = require('webpack');
 const htmlPlugin = new HtmlWebPackPlugin({
   template: "./client/index.html",
   filename: "./index.html"
