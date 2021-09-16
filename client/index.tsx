@@ -6,6 +6,6 @@ const Index = () => {
     <div className='container'>
       <h1>Hello finally we have met</h1>
     </div>
-  );
+  )
 }
 ReactDOM.render(<Index />, document.getElementById('root'))
