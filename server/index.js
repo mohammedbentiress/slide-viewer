@@ -1,4 +1,8 @@
 const express = require("express");
+const path = require("path");
+
+const DIST_DIR = path.join(__dirname, "../dist");
+const HTML_FILE = path.join(DIST_DIR, "index.html");
 const app = express();
 const port = process.env.PORT || 3000;
 const mockResponse = {
@@ -8,9 +12,10 @@ const mockResponse = {
 app.get("/api", (req, res) => {
   res.send(mockResponse);
 });
-app.get("/", (req, res) => {
+app.get(HTML_FILE, (req, res) => {
   res.status(200).send("Hello World!");
 });
 app.listen(port, function () {
   console.log("App listening on port: " + port);
 });
+app.use(express.static(DIST_DIR));
