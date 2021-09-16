@@ -20,6 +20,13 @@ module.exports = (env, argv) => {
         new ESLintPlugin({
             extensions: ["js", "jsx", "ts", "tsx"],
         }),
+        new webpack.LoaderOptionsPlugin({
+            test: /\.(png|svg|jpg|gif)$/,
+            loader: "file-loader",
+            options: {
+                name: '/static/[name].[ext]' 
+            }
+        }), 
         ],
     module: {
         rules: [
@@ -31,9 +38,6 @@ module.exports = (env, argv) => {
                 },
             },
         ],
-    },
-    test: /\.(png|svg|jpg|gif)$/,
-    loader: "file-loader",
-    options: { name: '/static/[name].[ext]' }
+    }
   };
 };
