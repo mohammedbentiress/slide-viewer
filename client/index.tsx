@@ -1,10 +1,13 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
+import Header from "./components/Header/index.jsx"
+import Content from "./components/Content/index.jsx"
 
 const Index = () => {
   return (
     <div className='container'>
-      <h1>Hello finally we have met</h1>
+      <Header />
+      <Content />
     </div>
   )
 }
