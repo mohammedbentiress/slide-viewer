@@ -14,6 +14,9 @@ module.exports = (env, argv) => {
       path: path.join(__dirname, 'dist'),
       filename: "bundle.js"
     },
+    resolve: {
+      extensions: [".js", ".jsx", ".json", ".ts", ".tsx"],
+    },
     watch: false,
     plugins: [
         htmlPlugin,
@@ -23,18 +26,18 @@ module.exports = (env, argv) => {
         ],
     module: {
         rules: [
-            {
-                test: /\.(ts|tsx)$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: "ts-loader",
-                },
+          {
+            test: /\.(ts|tsx)$/,
+            exclude: /node_modules/,
+            use: {
+              loader: "ts-loader",
             },
-            {
-              test: /\.(png|svg|jpg|gif)$/,
-              loader: "file-loader",
-              options: { name: '/static/[name].[ext]' }
-            }
+          },
+          {
+            test: /\.(png|svg|jpg|gif)$/,
+            loader: "file-loader",
+            options: { name: '/static/[name].[ext]' }
+          }
         ],
     },
   };
