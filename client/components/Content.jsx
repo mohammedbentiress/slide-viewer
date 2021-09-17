@@ -1,5 +1,5 @@
-import LOGO from "../images/react.png";
+import LOGO from '../images/react.png'
 
 export default function Content() {
-  return <img src={LOGO} alt="Logo"/>;
+  return <img src={LOGO} alt='Logo'/>
 }
