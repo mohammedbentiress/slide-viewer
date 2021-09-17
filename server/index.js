@@ -9,6 +9,7 @@ const mockResponse = {
   foo: "bar",
   bar: "foo",
 };
+app.use(express.static(DIST_DIR));
 app.get("/api", (req, res) => {
   res.send(mockResponse);
 });
