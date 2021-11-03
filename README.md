@@ -6,5 +6,5 @@
 ## Build project
 - yarn run build 
 
-## Start server 
+## Start server
 - yarn run start

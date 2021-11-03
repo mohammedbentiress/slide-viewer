@@ -1,14 +1,25 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
-import Header from './components/Header/index'
-import Content from './components/Content/index'
+import { HashRouter } from 'react-router-dom'
+import App from './components/App'
+import './style.css'
+import { Provider } from 'react-redux'
+import { store } from './store' // verifiez que le chemin est correct
+
+declare global {
+    interface Window {
+        mystore: unknown
+    }
+}
+window.mystore = store
 
 const Index = () => {
   return (
-    <div className='container'>
-      <Header />
-      <Content />
-    </div>
+    <Provider store={store}>`
+      <div className='container'>
+          <HashRouter ><App /></HashRouter >
+      </div>
+    </Provider>
   )
 }
 ReactDOM.render(<Index />, document.getElementById('root'))

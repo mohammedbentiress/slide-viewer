@@ -17,6 +17,7 @@ module.exports = (env, argv) => {
     resolve: {
       extensions: [".js", ".jsx", ".json", ".ts", ".tsx"],
     },
+    devtool: 'eval-source-map',
     watch: false,
     plugins: [
         htmlPlugin,
@@ -36,7 +37,15 @@ module.exports = (env, argv) => {
           {
             test: /\.(png|svg|jpg|gif)$/,
             loader: "file-loader",
-            options: { name: '/static/[name].[ext]' }
+            options: { 
+              name: '/static/[name].[ext]',
+               fix: true
+              }
+          },
+          {
+            test: /\.css$/i,
+            include: path.resolve(__dirname, 'client'),
+            use: ['style-loader', 'css-loader', 'postcss-loader'],
           }
         ],
     },
