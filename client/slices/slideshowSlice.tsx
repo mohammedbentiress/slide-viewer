@@ -14,20 +14,28 @@ interface Slides {
 // Define the initial state using that type
 const initialState: Slides = {
   slides: data,
-  currentSlide: 0
+  currentSlide: Number(window.location.href.split('/')[4])
 }
-export const slideshowSlice:any = createSlice({
+export const slideshowSlice = createSlice({
   name: 'slidesApp',
   // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   reducers: {
     nextSlide: (state) => {
       // TODO
-      state.currentSlide += 1
+      if (state.currentSlide + 1 > state.slides.length - 1) {
+        state.currentSlide = 0
+      } else {
+        state.currentSlide += 1
+      }
     },
     previousSlide: (state) => {
       // TODO
-      state.currentSlide -= 1
+      if (state.currentSlide - 1 < 0) {
+        state.currentSlide = state.slides.length - 1
+      } else {
+        state.currentSlide -= 1
+      }
     },
     // Use the PayloadAction type to declare the contents of `action.payload`
     setSlide: (state, action: PayloadAction<number>) => {
@@ -36,12 +44,7 @@ export const slideshowSlice:any = createSlice({
     },
     changeVisibilitySlide: (state, action: PayloadAction<number>) => {
       // TODO changer la propriété visible de true à false et inversement
-      console.log('change visibility for ' + action.payload)
-      console.log(current(state))
-      state.slides.map((index) => {
-        if (state.slides.indexOf(index) === action.payload) { index.visible = !index.visible }
-        return index
-      })
+      state.slides[action.payload].visible = !state.slides[action.payload].visible
     }
 
   }

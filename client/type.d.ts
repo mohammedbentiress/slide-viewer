@@ -1,7 +1,9 @@
 export interface Slide {
-    image: string;
-    title: string;
-    text: string;
-    visible: boolean;
-    notes: Array<string>;
+  type : string,
+  title?: string,
+  text?: string,
+  visible: boolean,
+  notes?: string,
+  image?: string,
+  items?:Array<string>
   }

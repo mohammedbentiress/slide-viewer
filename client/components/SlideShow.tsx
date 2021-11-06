@@ -14,9 +14,22 @@ type RouteParams = {
 const SlideShow : React.FC<Props> = ({ slides }) => {
   const params = useParams<RouteParams>()
 
-  return (
-        <SlideView slide = { slides[Number(params.id)]}></SlideView>
-  )
+  const isVisible = slides[Number(params.id)].visible
+  const opacity: string = isVisible ? 'opacity-100' : 'opacity-10'
+
+  if (slides[Number(params.id)].type === 'content') {
+    return (
+    <div className={opacity}>
+      <SlideView slide = { slides[Number(params.id)]}></SlideView>
+    </div>
+    )
+  } else {
+    return (
+      <div className={opacity}>
+        <div className="text-5xl">{slides[Number(params.id)].title}</div>
+      </div>
+    )
+  }
 }
 
 export default SlideShow

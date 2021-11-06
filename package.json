@@ -24,7 +24,7 @@
     "test": "echo \"Error: pas de tests pour le moment\" && exit 1",
     "build": "webpack --mode production",
     "lint": "eslint client/*/*.tsx --fix",
-    "dev": "webpack --mode development && node server/index.js"
+    "dev": "eslint client/*/*.tsx --fix && eslint client/*.ts --fix && webpack --mode development --watch"
   },
   "devDependencies": {
     "@types/react": "^17.0.21",
