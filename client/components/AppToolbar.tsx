@@ -66,7 +66,7 @@ const AppToolbar: React.FC<Props> = ({ slides }) => {
             </svg>
         </button>
      </div>
-     
+
     <div className="p-2">
 
         <div className="dropdown inline-block relative">
