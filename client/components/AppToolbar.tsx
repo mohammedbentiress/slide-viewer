@@ -29,19 +29,25 @@ const AppToolbar: React.FC<Props> = ({ slides }) => {
     input:checked ~ .dot {
         transform: translateX(100%);
         background-color: #48bb78;
-    }`
+    }
+    @media screen and (max-width: 640px) {
+      .apptoolbar {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+    `
   // dans votre composant on branche le dispatch au store :
   const dispatch = useAppDispatch()
   const currentSlide = Number((useParams<RouteParams>()).id)
 
   // lors du click sur le bouton
   return (
-    <div className="border-2 border-black p-2 border-b-0 border-r-0 border-l-0 grid grid-cols-3 text-right">
+    <div className="apptoolbar border-2 border-black p-2 border-b-0 border-r-0 border-l-0 grid grid-cols-3 text-right">
     <style>
     {css}
     </style>
-    <div className="inline-flex float-right flex items-center justify-center w-full">
-         <button className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l" onClick = {() => {
+    <div className=" inline-flex float-right flex items-center justify-center w-full">
+         <button className="bg-gray-300 hover:bg-gray-400 text-gray-800 py-2 px-4 rounded-l" onClick = {() => {
            dispatch(
              previousSlide()
            )
@@ -50,7 +56,7 @@ const AppToolbar: React.FC<Props> = ({ slides }) => {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
          </button>
-         <button className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r" onClick = {() => {
+         <button className="bg-gray-300 hover:bg-gray-400 text-gray-800 py-2 px-4 rounded-r" onClick = {() => {
            dispatch(
              nextSlide()
            )
@@ -60,29 +66,7 @@ const AppToolbar: React.FC<Props> = ({ slides }) => {
             </svg>
         </button>
      </div>
-     <div className="flex items-center justify-center w-full">
-
-        <label
-            htmlFor="toogleA"
-            className="flex items-center cursor-pointer"
-        >
-            <div className="relative">
-            <input id="toogleA" type="checkbox" className="sr-only" onClick ={() => {
-              dispatch(
-                changeVisibilitySlide(
-                  currentSlide
-                )
-              )
-            }}/>
-            <div className="w-10 h-4 bg-gray-400 rounded-full shadow-inner"></div>
-            <div className="dot absolute w-6 h-6 bg-white rounded-full shadow -left-1 -top-1 transition"></div>
-            </div>
-            <div className="ml-3 text-gray-700 font-medium">
-                Visible
-            </div>
-        </label>
-
-    </div>
+     
     <div className="p-2">
 
         <div className="dropdown inline-block relative">
@@ -102,7 +86,32 @@ const AppToolbar: React.FC<Props> = ({ slides }) => {
         </div>
 
     </div>
+    <div className="flex items-center justify-center w-full">
+
+        <label
+            htmlFor="toogleA"
+            className="flex items-center cursor-pointer"
+        >
+            <div className="relative">
+            <input id="toogleA" type="checkbox" className="sr-only" onClick ={() => {
+              dispatch(
+                changeVisibilitySlide(
+                  currentSlide
+                )
+              )
+            }}/>
+            <div className="w-10 h-4 bg-gray-400 rounded-full shadow-inner"></div>
+            <div className="dot absolute w-6 h-6 bg-white rounded-full shadow -left-1 -top-1 transition"></div>
+            </div>
+            <div className="ml-3 text-gray-700">
+                Visible
+            </div>
+        </label>
+
+    </div>
+
   </div>
+
   // <div>
   //     <button>left</button>
   //     <button>right</button>

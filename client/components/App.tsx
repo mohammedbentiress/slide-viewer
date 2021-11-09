@@ -15,6 +15,19 @@ const App: React.FC = () => {
   type RouteParams = {
     id: string;
   };
+  const css = `
+    .container {
+        min-width:100% !important;
+      }
+    .cont{
+      overflow:hidden;
+    }
+    @media screen and (max-width: 640px) {
+        .cont {
+          padding: 10px;
+      }
+    }
+    `
 
   // window.onpopstate = function (event) {
   //   console.log('location: ' + document.location + ', state: ' + JSON.stringify(state.currentSlide))
@@ -37,11 +50,15 @@ const App: React.FC = () => {
   }
 
   return (
+
     <Switch>
       <Route
       path="/:id"
       render={() => (
-        <div className="h-screen bg-gray-200 flex px-96 justify-center items-center mb-15">
+        <div className="cont h-screen .bg-gray-200 flex justify-center items-center sm:p-6">
+          <style>
+            {css}
+          </style>
           <div className="border-2 border-black">
             <SlideShow slides={state.slides} />
             <AppToolbar slides={state.slides} />
