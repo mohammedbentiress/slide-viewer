@@ -16,15 +16,15 @@ const App: React.FC = () => {
     id: string;
   };
 
-  // window.onpopstate = function (event) {
-  //   console.log('location: ' + document.location + ', state: ' + JSON.stringify(state.currentSlide))
-  //   const currentSlide = Number((useParams<RouteParams>()).id)
-  //   dispatch(
-  //     setSlide(
-  //       currentSlide
-  //     )
-  //   )
-  // }
+  window.onpopstate = function (event) {
+    console.log('location: ' + document.location + ', state: ' + JSON.stringify(state.currentSlide))
+    const currentSlide = Number(window.location.href.split('/')[4])
+    dispatch(
+      setSlide(
+        currentSlide
+      )
+    )
+  }
 
   const hash = '#/' + state.currentSlide
   if (location.hash !== hash) {
