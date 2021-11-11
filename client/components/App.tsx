@@ -1,16 +1,18 @@
 import * as React from 'react'
 import SlideShow from './SlideShow'
 import AppToolbar from './AppToolbar'
-import { Switch, Route, useHistory, useParams } from 'react-router'
+import { Switch, Route, useHistory, useParams, Redirect } from 'react-router'
 import { RootState, store } from '../store'
 import { useAppDispatch, useAppSelector } from '../hooks'
 import { setSlide } from '../slices/slideshowSlice'
 import { current } from 'immer'
+import { isMobile } from 'react-device-detect'
+import Controller from './Controller'
+import SlideView from './SlideView'
+import Present from './Present'
 
 const App: React.FC = () => {
-  const state = useAppSelector(
-    (state: RootState) => state.slideReducer
-  )
+  const state = useAppSelector((state: RootState) => state.slideReducer)
   const dispatch = useAppDispatch()
   type RouteParams = {
     id: string;
@@ -30,16 +32,18 @@ const App: React.FC = () => {
     `
 
   window.onpopstate = function (event) {
-    console.log('location: ' + document.location + ', state: ' + JSON.stringify(state.currentSlide))
-    const currentSlide = Number(window.location.href.split('/')[4])
-    dispatch(
-      setSlide(
-        currentSlide
-      )
+    console.log(
+      'location: ' +
+        document.location +
+        ', state: ' +
+        JSON.stringify(state.currentSlide)
     )
+    const currentSlide = Number(window.location.href.split('/')[5])
+    dispatch(setSlide(currentSlide))
   }
 
-  const hash = '#/' + state.currentSlide
+  const url = isMobile ? 'controller' : 'edit'
+  const hash = '#/' + url + '/' + state.currentSlide
   if (location.hash !== hash) {
     console.log(hash)
     window.location.hash = hash
@@ -50,22 +54,41 @@ const App: React.FC = () => {
   }
 
   return (
-
     <Switch>
-      <Route
-      path="/:id"
-      render={() => (
+      {isMobile
+        ? (
+          <Route exact
+          path="/controller/:id"
+          render={() => <Controller slides={state.slides} />}
+        />
+          )
+        : (
+      <Route exact path="/edit/:id" render={() => (
         <div className="cont h-screen .bg-gray-200 flex justify-center items-center sm:p-6">
-          <style>
-            {css}
-          </style>
+          <style>{css}</style>
           <div className="border-2 border-black">
             <SlideShow slides={state.slides} />
             <AppToolbar slides={state.slides} />
           </div>
         </div>
-      )}
-      />
+      )} />
+          )
+      }
+
+      <Route exact path="/present/:id" render={
+        () => (
+          <Present slides={state.slides}/>
+        )}/>
+      <Route exact path="*">
+      {isMobile
+        ? (
+          <Redirect to="/controller/0" />
+          )
+        : (
+          <Redirect to="/edit/0" />
+          )
+      }
+      </Route>
     </Switch>
   )
 }

@@ -14,7 +14,7 @@ interface Slides {
 // Define the initial state using that type
 const initialState: Slides = {
   slides: data,
-  currentSlide: Number(window.location.href.split('/')[4])
+  currentSlide: Number(window.location.href.split('/')[5])
 }
 export const slideshowSlice = createSlice({
   name: 'slidesApp',
