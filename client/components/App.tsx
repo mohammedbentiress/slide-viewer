@@ -32,20 +32,20 @@ const App: React.FC = () => {
     `
 
   window.onpopstate = function (event) {
-    console.log(
-      'location: ' +
-        document.location +
-        ', state: ' +
-        JSON.stringify(state.currentSlide)
-    )
+    // console.log(
+    //   'location: ' +
+    //     document.location +
+    //     ', state: ' +
+    //     JSON.stringify(state.currentSlide)
+    // )
     const currentSlide = Number(window.location.href.split('/')[5])
-    dispatch(setSlide(currentSlide))
+    dispatch(setSlide(currentSlide, true))
   }
 
   const url = isMobile ? 'controller' : 'edit'
   const hash = '#/' + url + '/' + state.currentSlide
   if (location.hash !== hash) {
-    console.log(hash)
+    // console.log(hash)
     window.location.hash = hash
     // Force scroll to top this is what browsers normally do when
     // navigating by clicking a link.
