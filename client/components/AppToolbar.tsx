@@ -156,7 +156,7 @@ const AppToolbar: React.FC<Props> = ({ slides }) => {
               type="checkbox"
               className="sr-only"
               onClick={() => {
-                dispatch(changeVisibilitySlide(currentSlide))
+                dispatch(changeVisibilitySlide(currentSlide, true))
               }}
             />
             <div className="w-10 h-4 bg-gray-400 rounded-full shadow-inner"></div>

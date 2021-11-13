@@ -1,14 +1,19 @@
 import * as React from 'react'
 import { isMobile } from 'react-device-detect'
-import { useHistory } from 'react-router'
+import { useHistory, useParams } from 'react-router'
 import { Slide } from '../type'
 
 interface Props {
   slide: Slide;
 }
 
+type RouteParams = {
+  id: string;
+};
+
 const SlideView: React.FC<Props> = ({ slide }) => {
   const history = useHistory()
+  const id = useParams<RouteParams>().id
   const toggleFullscreen = () => {
     const elem = document.querySelector('.fullscreen')
     if (!document.fullscreenElement) {
@@ -24,22 +29,17 @@ const SlideView: React.FC<Props> = ({ slide }) => {
     if (location.hash.includes('present')) {
       toggleFullscreen()
     }
-    document.addEventListener('keydown', function (e) {
-      console.log(e.key)
-      if (e.key === 'Escape') {
-        e.preventDefault()
-        console.log('escape clicked 1')
-        if (document.fullscreenElement) {
-          console.log('escape clicked 2')
-          document.exitFullscreen()
-            .then(() => console.log('Document Exited from Full screen mode'))
-            .catch((err) => console.error(err))
-        } else {
-          document.documentElement.requestFullscreen()
-        }
-      }
-    }, false)
   })
+
+  // Back to edit page when the user quit the present mode
+  document.addEventListener('fullscreenchange', function (e) {
+    if (document.fullscreenElement) {
+      console.log(`Element: ${document.fullscreenElement.id} entered full-screen mode.`)
+    } else {
+      history.push('/edit/' + Number(id))
+    }
+  }, false)
+
   return (
     <div className="fullscreen bg-gray-200">
       <h1 className="border-2 border-black m-2 p-2 grid-cols-12">

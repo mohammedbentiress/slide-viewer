@@ -1,14 +1,12 @@
 import * as React from 'react'
 import SlideShow from './SlideShow'
 import AppToolbar from './AppToolbar'
-import { Switch, Route, useHistory, useParams, Redirect } from 'react-router'
+import { Switch, Route, Redirect } from 'react-router'
 import { RootState, store } from '../store'
 import { useAppDispatch, useAppSelector } from '../hooks'
 import { setSlide } from '../slices/slideshowSlice'
-import { current } from 'immer'
 import { isMobile } from 'react-device-detect'
 import Controller from './Controller'
-import SlideView from './SlideView'
 import Present from './Present'
 
 const App: React.FC = () => {

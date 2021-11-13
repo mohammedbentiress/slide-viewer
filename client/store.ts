@@ -1,7 +1,7 @@
 import { AnyAction, configureStore, Dispatch, Middleware, Store } from '@reduxjs/toolkit'
 import { io } from 'socket.io-client'
 
-import slideshowReducer, { setSlide } from './slices/slideshowSlice' // chemin à adapter
+import slideshowReducer, { changeVisibilitySlide, setSlide } from './slices/slideshowSlice' // chemin à adapter
 
 // Custome middleware
 const myLoggerMiddleware: Middleware<Dispatch> = (store: Store) => (next) => {
@@ -19,8 +19,7 @@ export const propagateSocketMiddleware: Middleware<Dispatch> =
     // Explorez la structure de l'objet action :
     console.log('propagateSocketMiddleware', action)
 
-    // TODO traiter et propager les actions au serveur.
-    // Vous pourrez utiliser
+    // Traiter et propager les actions au serveur.
     if (action.meta) {
       socket.emit('action', action)
     }
@@ -32,17 +31,17 @@ export const propagateSocketMiddleware: Middleware<Dispatch> =
 export const recieveSocketMiddleware: Middleware<Dispatch> =
   (store: Store) => (next) => (action: AnyAction) => {
     socket.on('action', (msg) => {
-      console.log('action recived: ', msg.payload)
+      console.log('action recived: ', msg)
       switch (
         msg.type // ajuster le msg.type pour qu'il corresponde bien à celui dédifit pour l'action votre reducer
       ) {
         case 'slidesApp/setSlide': // <- probablement autre chose à vous de trouver
-          console.log('from inside', msg.payload)
           store.dispatch(setSlide(msg.payload, false))
           break
+        case 'slidesApp/changeVisibilitySlide' :
+          store.dispatch(changeVisibilitySlide(msg.payload, false))
       }
     })
-
     next(action)
   }
 

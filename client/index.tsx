@@ -16,7 +16,7 @@ window.mystore = store
 const Index = () => {
   return (
     <Provider store={store}>
-      <div className='container'>
+      <div style={ { height: '100%' } } className='container'>
           <HashRouter ><App /></HashRouter >
       </div>
     </Provider>

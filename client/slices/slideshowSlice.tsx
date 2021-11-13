@@ -31,6 +31,14 @@ export const slideshowSlice = createSlice({
         return { payload, meta: meta }
       }
     },
+    changeVisibilitySlide: {
+      reducer: (state, action: PayloadAction<number, string, boolean>) => {
+        state.slides[action.payload].visible = !state.slides[action.payload].visible
+      },
+      prepare (payload: number, meta: boolean) {
+        return { payload, meta: meta }
+      }
+    },
     nextSlide: (state) => {
       if (state.currentSlide + 1 > state.slides.length - 1) {
         state.currentSlide = 0
@@ -44,9 +52,6 @@ export const slideshowSlice = createSlice({
       } else {
         state.currentSlide -= 1
       }
-    },
-    changeVisibilitySlide: (state, action: PayloadAction<number>) => {
-      state.slides[action.payload].visible = !state.slides[action.payload].visible
     }
   }
 })

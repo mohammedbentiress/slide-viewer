@@ -10,6 +10,7 @@
     "target": "es5",
     "resolveJsonModule": true,
     "esModuleInterop":true,
+    "allowJs": true
   },
   "include": ["client", "index.d.ts"],
   "exclude": ["node_modules", "**/*.spec.ts", "**/*.test.ts"]
