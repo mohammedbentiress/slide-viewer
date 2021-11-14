@@ -1,8 +1,8 @@
 [
-    { "type":"content", "image": "https://picsum.photos/200/300", "title": "TIW 8", "text": "", "visible": true, "items": ["item 1.1", "item 1.2", "item 1.3"] },
+    { "type":"content", "image": "https://picsum.photos/198/298", "title": "TIW 8", "text": "", "visible": true, "items": ["item 1.1", "item 1.2", "item 1.3"] },
     {
       "type":"content",
-      "image": "https://picsum.photos/200/300",
+      "image": "https://picsum.photos/199/299",
       "title": "TP 1",
       "text": "Le TP porte sur des rappels de developpement Web",
       "visible": false,
