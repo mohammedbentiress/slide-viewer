@@ -19,4 +19,4 @@
 ## App is deployed on heroku
 [react-redux-tp2][react-redux-tp2]
 
-[react-redux-tp2]: (https://react-redux-tp2.herokuapp.com)
+[react-redux-tp2]: https://react-redux-tp2.herokuapp.com
