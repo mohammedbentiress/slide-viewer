@@ -48,14 +48,13 @@ const AppToolbar: React.FC<Props> = ({ slides, currentSlide }) => {
   }
 
   React.useEffect(() => {
-   
-    
-  }, )
+
+  })
 
   React.useEffect(() => {
-    const input = document.querySelector('#toogleA') as HTMLInputElement;
+    const input = document.querySelector('#toogleA') as HTMLInputElement
     input.checked = slides[currentSlide].visible
-  },)
+  })
 
   // lors du click sur le bouton
   return (

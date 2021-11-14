@@ -522,7 +522,7 @@ const Controller: React.FC<Props> = ({ slides, currentSlide }) => {
     const gesture = recognizer.check(gesturePoints) as Gesture
     console.log('[[' + gesturePoints.join('],[') + ']]')
     gesturePoints = []
-    console.log("gesture: ", gesture)
+    console.log('gesture: ', gesture)
     if (gesture.recognized === true && gesture.name === 'precedent') {
       dispatch(previousSlide())
     }
