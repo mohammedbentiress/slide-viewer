@@ -1,19 +1,14 @@
 import * as React from 'react'
-import { isMobile } from 'react-device-detect'
 import { useHistory, useParams } from 'react-router'
 import { Slide } from '../type'
 
 interface Props {
   slide: Slide;
+  currentSlide: number;
 }
 
-type RouteParams = {
-  id: string;
-};
-
-const SlideView: React.FC<Props> = ({ slide }) => {
+const SlideView: React.FC<Props> = ({ slide, currentSlide }) => {
   const history = useHistory()
-  const id = useParams<RouteParams>().id
   const toggleFullscreen = () => {
     const elem = document.querySelector('.fullscreen')
     if (!document.fullscreenElement) {
@@ -36,7 +31,7 @@ const SlideView: React.FC<Props> = ({ slide }) => {
     if (document.fullscreenElement) {
       console.log(`Element: ${document.fullscreenElement.id} entered full-screen mode.`)
     } else {
-      history.push('/edit/' + Number(id))
+      history.push('/edit/' + currentSlide)
     }
   }, false)
 

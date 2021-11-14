@@ -11,13 +11,10 @@ import { useAppDispatch } from '../hooks'
 
 interface Props {
   slides: Slide[];
+  currentSlide: number
 }
 
-type RouteParams = {
-  id: string;
-};
-
-const AppToolbar: React.FC<Props> = ({ slides }) => {
+const AppToolbar: React.FC<Props> = ({ slides, currentSlide }) => {
   // add css style
   const css = `
     .dropdown:hover .dropdown-menu {
@@ -44,7 +41,6 @@ const AppToolbar: React.FC<Props> = ({ slides }) => {
 
   // dans votre composant on branche le dispatch au store :
   const dispatch = useAppDispatch()
-  const currentSlide = Number(useParams<RouteParams>().id)
   const history = useHistory()
 
   const handleFullscreen = () => {

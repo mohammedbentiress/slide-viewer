@@ -1,6 +1,5 @@
 import * as React from 'react'
-import { isMobile, MobileView } from 'react-device-detect'
-import { useParams } from 'react-router'
+import { MobileView } from 'react-device-detect'
 import { Slide } from '../type'
 import AppToolbar from './AppToolbar'
 import OneDollar from '../onedollar.js'
@@ -9,11 +8,8 @@ import { nextSlide, previousSlide } from '../slices/slideshowSlice'
 
 interface Props {
   slides: Slide[];
+  currentSlide: number
 }
-
-type RouteParams = {
-  id: string;
-};
 type Gesture = {
   name: string;
   score: number;
@@ -29,9 +25,8 @@ type Gesture = {
   }[];
 };
 
-const Controller: React.FC<Props> = ({ slides }) => {
+const Controller: React.FC<Props> = ({ slides, currentSlide }) => {
   const dispatch = useAppDispatch()
-  const params = useParams<RouteParams>()
   const clickX = new Array()
   const clickY = new Array()
   const clickDrag = new Array()
@@ -527,13 +522,16 @@ const Controller: React.FC<Props> = ({ slides }) => {
     const gesture = recognizer.check(gesturePoints) as Gesture
     console.log('[[' + gesturePoints.join('],[') + ']]')
     gesturePoints = []
-    console.log(gesture)
+    console.log("gesture: ", gesture)
     if (gesture.recognized === true && gesture.name === 'precedent') {
       dispatch(previousSlide())
     }
     if (gesture.recognized === true && gesture.name === 'suivant') {
       dispatch(nextSlide())
     }
+    const canvas = document.querySelector('canvas')
+    const context = canvas.getContext('2d')
+    context.clearRect(0, 0, canvas.width, canvas.height)
   }
 
   React.useEffect(() => {
@@ -546,11 +544,11 @@ const Controller: React.FC<Props> = ({ slides }) => {
   return (
     <MobileView style={{ height: '100%' }}>
       <ul className="border-2 border-black m-2 p-6 list-disc">
-        {slides[Number(params.id)].items?.map((key) => (
+        {slides[Number(currentSlide)].items?.map((key) => (
           <li key={key}> {key} </li>
         ))}
       </ul>
-      <AppToolbar slides={slides} />
+      <AppToolbar slides={slides} currentSlide={currentSlide}/>
       <canvas
         style={{
           touchAction: 'none',
