@@ -47,6 +47,16 @@ const AppToolbar: React.FC<Props> = ({ slides, currentSlide }) => {
     history.push('/present/' + currentSlide)
   }
 
+  React.useEffect(() => {
+   
+    
+  }, )
+
+  React.useEffect(() => {
+    const input = document.querySelector('#toogleA') as HTMLInputElement;
+    input.checked = slides[currentSlide].visible
+  },)
+
   // lors du click sur le bouton
   return (
     <div className="apptoolbar border-2 border-black p-2 border-b-0 border-r-0 border-l-0 grid grid-cols-3 text-right">

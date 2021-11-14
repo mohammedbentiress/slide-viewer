@@ -16,7 +16,7 @@
       "visible": true,
       "items": ["3.1", "3.2"]
     },
-    { "type":"content", "image": "https://picsum.photos/201/301", "title": "TP 3", "text": "Le TP 3", "visible": true, "items": ["4.1", "4.2", "4.3"] },
+    { "type":"content", "image": "https://picsum.photos/201/301", "title": "TP 3", "text": "Le TP 3", "visible": false, "items": ["4.1", "4.2", "4.3"] },
     { "type":"content", "image": "https://picsum.photos/202/302", "title": "TP 4", "text": "Le TP 4", "visible": true, "items": ["5.1", "5.2"] },
     { "type":"content", "image": "https://picsum.photos/203/303", "title": "Question ?", "text": "Le TP 5", "visible": true, "items": ["6.1", "6.2"] },
     { "type":"title","title": "title 1","visible": true}
